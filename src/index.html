@@ -5,8 +5,8 @@
       <div>Partido<input type="text" name="partido" ></input></div>
       <div>
         Año<select name="year">
-          {% for y in years %}
-          <option value="{{ y }}">{{ y }}</option>
+          {% for year in years %}
+          <option value="{{ year }}">{{ year }}</option>
           {% endfor %}
           </select>
       <div><input type="submit" value="Nuevo"></div>

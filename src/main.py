@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
+import model
+import simplejson
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
@@ -8,16 +10,37 @@ years_avaliable = [2004, 2008, 2012 ]
 path = os.path.join(os.path.dirname(__file__), 'index.html')
         
 class MainPage(webapp.RequestHandler):
-    def get(self):
-        year = self.request.get('year')
-        algorithm = self.request.get('alg', 'dhont')
-        # Read the avaliable years form database
+  
+  def get(self):
+    # If there is GET/POST data, retrieve it
+    year = self.request.get('year', "")
+    algorithm = self.request.get('alg', "")
+    
+    # Read the avaliable years form model
+    model.CensoElectoral.all()
+    template_values = { 'years': years_avaliable,
+            'selected_year': year,
+            'alg': algorithm,
+            }
         
-        template_values = { 'years': years_avaliable,
-                            'selected_year': year,
-                            'alg': algorithm,
-                            }
-        self.response.out.write( template.render(path, template_values) )
+    dataResponse = {}
+    if( algorithm == 'dhont'):
+      # TODO load from db
+      color = [[255,0,0], [123,45,78], [0,0,255]]
+      seats = [25, 75, 30]
+
+      dataResponse.setdefault('color', color)
+      dataResponse.setdefault('seats', seats)
+      dataResponse.setdefault('total_seats', sum(seats))
+      
+      self.response.out.write( simplejson.dumps(dataResponse) )
+    elif(algorithm == 'dhont2'):
+      pass
+    elif(algorithm == 'dhont3'):
+      pass
+          
+    else:
+      self.response.out.write( template.render(path, template_values) )
 
 
 
