@@ -14,6 +14,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 
+from leyDHont import LeyDHont
+
 years_avaliable = [2004, 2008, 2012 ]
 
 
@@ -31,17 +33,11 @@ class MainPage(webapp.RequestHandler):
             'alg': algorithm,
             }
     
-    dataResponse = {}
     if( algorithm == 'dhont'):
       # TODO load from db
-      color = [[255,0,0], [123,45,78], [0,0,255]]
-      seats = [25, 75, 30]
-
-      dataResponse.setdefault('color', color)
-      dataResponse.setdefault('seats', seats)
-      dataResponse.setdefault('total_seats', sum(seats))
-      
-      self.response.out.write( simplejson.dumps(dataResponse) )
+      ley = LeyDHont(year)
+      parlamento = ley.repartirEscanos()            
+      self.response.out.write( simplejson.dumps(parlamento.distribucion) )
     elif(algorithm == 'dhont2'):
       pass
     elif(algorithm == 'dhont3'):

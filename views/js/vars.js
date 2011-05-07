@@ -2,48 +2,24 @@
  * @author crispamares
  */
 
-$(document).ready(function(){  
-	$("#paco p").html("POADPOAPODAPDOPADO");
-	
-
-$.ajax({
-	url: "http://localhost:8080/?year=2005&alg=dhont",
-	dataType: "json",
-	success: function(json) {
-   		alert("JSON Data: " + json.total_seats);
-	 }
-});
-
-	
-	$.getJSON("http://localhost:8080/?year=2005&alg=dhont", function(json) {
-   		alert("JSON Data: " + json.total_seats);
-	 })
-
-	
-	$("#paco p").load("http://localhost:8080/?year=2005&alg=dhont"); 
-	}
-	);
-
-
-
-
+var Distribution = {"colors" : [[255,0,0], [123,45,78], [0,0,255]],
+"seats" : [25, 75, 30],
+"total_seats" : 130
+}
 
 /*
-$.getJSON("http://127.0.0.1:8000/otrosgalloscantarian/src/processing/parlament_dist.json", function(json) {
-   alert("JSON Data: " + json.total_seats);
- })
- .error(function() { alert("error"); });
+$.getJSON("http://localhost:8080/?year=2005&alg=dhont", function(json) {
+		Distribution.colors = json.colors;
+		Distribution.seats = json.seats;
+		Distribution.total_seats = json.total_seats;
+	 });
+	
+$(document).ready(function(){  
+	});
 */
-
 var max_diameter =  350;
 
-var background_color = 150;
-
-var Distribution = {
-	"colors" : [[255,0,0], [123,45,78], [0,0,255]],
-	"seats" : [25, 75, 30],
-	"total_seats" : 130,
-	};
+var background_color = 0;
 	
 var seats_percentages = function() {
 	var percentages = [];

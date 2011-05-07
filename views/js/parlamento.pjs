@@ -24,6 +24,10 @@ void setup()
 
 void draw(){
 
+    pushMatrix();
+    translate(width/2, height/2);
+    rotate(PI);
+
     int step = max_diameter - diameter;
     if (abs(step) > 1) { 
 	diameter += abs(step) * easing;
@@ -31,20 +35,13 @@ void draw(){
     else {
 	calculate_polar_coords();
 	noLoop();
+	draw_borders();
+	return;
     }
 
-    pushMatrix();
-    translate(width/2, height/2);
-    rotate(PI);
 
     stroke(0);
     draw_arcs(0,0);
-    noFill();
-    stroke(255);
-    arc(0, -1, diameter, diameter, 0, PI);
-    line(diameter/6 , -1, diameter/2, -1);
-    line(-diameter/6, -1, -diameter/2, -1);
-
 
     /*
      *  Circle
@@ -52,11 +49,6 @@ void draw(){
     noStroke();
     fill(background_color); 
     ellipse(0, 0, diameter/3, diameter/3);
-    noFill();
-    stroke(0);
-    arc(0, -1, diameter/3, diameter/3, 0, PI);
-    stroke(255);
-    arc(0, 0, diameter/3, diameter/3, 0, PI);
 }
 
 void draw_arcs(int x, int y) {
@@ -67,6 +59,21 @@ void draw_arcs(int x, int y) {
 	arc(x, y, diameter, diameter, lastAng, lastAng+angs[i]);
 	lastAng += angs[i];
     }    
+}
+
+void draw_borders() {
+    noFill();
+    stroke(255);
+    arc(0, -1, diameter, diameter, 0, PI);
+    line(diameter/6 , -1, diameter/2, -1);
+    line(-diameter/6, -1, -diameter/2, -1);
+
+    noFill();
+    stroke(0);
+    arc(0, -1, diameter/3, diameter/3, 0, PI);
+    stroke(255);
+    arc(0, 0, diameter/3, diameter/3, 0, PI);
+
 }
 
 void calculate_polar_coords() {

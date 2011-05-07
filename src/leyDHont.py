@@ -9,7 +9,7 @@ class LeyDHont:
         self.diputadosProvincias = {}
         self.threshold = 0.03
         self.censos = model.CensoElectoral.all()
-        self.censos.filter("ano =","2008")
+        self.censos.filter("ano =",ano)
 
     def repartirEscanos(self):
         parlamento = Parlamento(350)
