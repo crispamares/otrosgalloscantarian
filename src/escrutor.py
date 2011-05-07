@@ -72,8 +72,8 @@ def LoadFile(filepath):
                     votos[comunidad][provincia]['Votos'][sigla] += votosMunicipio
 
     # El ano es el mismo para todos
-    i = filepath.find('/')
-    ano = filepath[i+1:i+5]
+    i = filepath.find('.csv')
+    ano = filepath[i-4:i]
 
     WriteToDataStore(ano, votos)
 

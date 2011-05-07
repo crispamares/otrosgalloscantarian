@@ -1,0 +1,107 @@
+
+int diameter = 0;
+float[] percentages = seats_percentages();
+
+int[] angs = {};
+for (int i = 0; i < percentages.length; i++) {
+    angs[i] = percentages[i] * PI / 100;
+}
+
+float easing = 0.1;
+
+float[] polar_coords = {};
+
+void setup()  
+{  
+    size(800,500);  
+    background(background_color);  
+    fill(255);  
+    PFont fontA = loadFont("courier");  
+    textFont(fontA, 14);    
+    smooth();  
+    noStroke();
+}  
+
+void draw(){
+
+    int step = max_diameter - diameter;
+    if (abs(step) > 1) { 
+	diameter += abs(step) * easing;
+    }
+    else {
+	calculate_polar_coords();
+	noLoop();
+    }
+
+    pushMatrix();
+    translate(width/2, height/2);
+    rotate(PI);
+
+    stroke(0);
+    draw_arcs(0,0);
+    noFill();
+    stroke(255);
+    arc(0, -1, diameter, diameter, 0, PI);
+    line(diameter/6 , -1, diameter/2, -1);
+    line(-diameter/6, -1, -diameter/2, -1);
+
+
+    /*
+     *  Circle
+     */
+    noStroke();
+    fill(background_color); 
+    ellipse(0, 0, diameter/3, diameter/3);
+    noFill();
+    stroke(0);
+    arc(0, -1, diameter/3, diameter/3, 0, PI);
+    stroke(255);
+    arc(0, 0, diameter/3, diameter/3, 0, PI);
+}
+
+void draw_arcs(int x, int y) {
+    float lastAng = 0;  
+
+    for (int i=0; i<angs.length; i++){  
+	fill(Distribution.colors[i][0], Distribution.colors[i][1], Distribution.colors[i][2]);
+	arc(x, y, diameter, diameter, lastAng, lastAng+angs[i]);
+	lastAng += angs[i];
+    }    
+}
+
+void calculate_polar_coords() {
+    lastAng = 0;
+    for (int i=0; i<angs.length; i++){
+	float[] bounds = {(max_diameter/3)/2,max_diameter/2,lastAng, lastAng+angs[i]}; // r_min, r_max, theta_min, theta_max
+	polar_coords[i] = bounds;
+	lastAng += angs[i];
+    }
+}
+
+void mouseMoved() {
+    fill(0);
+    
+    float [] o = {-(mouseX - width/2), -(mouseY - height/2)};
+    
+    float [] p = cartesian_to_polar (o[0], o[1]);
+    for (int i=0; i<angs.length; i++){
+	if (p[0] >= polar_coords[i][0] && p[0] <= polar_coords[i][1] &&
+	    p[1] >= polar_coords[i][2] && p[1] <= polar_coords[i][3]) {
+	    //text(i, mouseX, mouseY);
+	}
+    }
+}
+
+float [] polar_to_cartesian(r, theta) {
+    int [] p = {};
+    p[0] = r * cos(theta);
+    p[1] = r * sin(theta);
+    return p;
+}
+
+float [] cartesian_to_polar(x, y) {
+    int [] p = {};
+    p[0] = sqrt(pow(x,2) + pow(y,2)); // radius
+    p[1] = atan2(y,x);      // theta
+    return p;
+}

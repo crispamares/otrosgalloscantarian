@@ -1,0 +1,23 @@
+application: otrosgalloscantarian
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /(.*\.(gif|png|jpg|ico))
+  static_files: views/images
+  upload: (.*\.(gif|png|jpg|ico))
+
+- url: /(.*\.(js|pjs))
+  static_files: views/js/\1
+  upload: (.*\.(js|pjs))
+
+- url: /(.*\.(css))
+  static_files: views/\1
+  upload: (.*\.(css))
+
+
+- url: .*
+  script: main.py
+builtins:
+- remote_api: on
