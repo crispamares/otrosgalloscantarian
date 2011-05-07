@@ -1,21 +1,7 @@
 import model
 import math
+from parlamento import *
 
-class Parlamento:
-    def __init__(self, numDiputados):
-        self.distribucion = {'parties':[],'seats':[],'color':[],'total_seats':numDiputados}
-        self.asientosLibres = numDiputados
-
-    def anadirDiputado(self, diputado):
-        partido = diputado[1]
-        if (not partido in self.distribucion['parties']):
-            self.distribucion['parties'] += [partido]
-            self.distribucion['seats'] += [1]
-            self.distribucion['color'] += [[255,0,0]] # pedir a la bbdd
-        else:
-            index = self.distribucion['parties'].index(partido)
-            self.distribucion['seats'][index] += 1
-        self.asientosLibres -= 1
 
 
 class LeyDHont:
@@ -37,13 +23,15 @@ class LeyDHont:
             poblacionDeDerecho += censoProvincia.censoTotal
             candidaturas = self.candidaturasMayoritarias(censoProvincia)
             diputadosProvinciales[provincia] = self.asignarDiputados(candidaturas)
+            #print "Diputados Provinciales"
+            #print diputadosProvinciales[provincia]
 
             # Se elijen dos diputados de cada provincia a excepcion de ceuta y melilla
             diputado = diputadosProvinciales[provincia].pop()
-            parlamento.anadirDiputado(diputado)
+            parlamento.anadirDiputados(diputado)
             if (provincia != "Ceuta" and provincia != "Melilla"):
                 diputado = diputadosProvinciales[provincia].pop()
-                parlamento.anadirDiputado(diputado)
+                parlamento.anadirDiputados(diputado)
 
         # Asignar diputados por poblacion
         cuotaReparto = 1.0 * poblacionDeDerecho / parlamento.asientosLibres
@@ -58,7 +46,7 @@ class LeyDHont:
             coeficientes += [(coeficiente,provincia)]
             while (numDiputadosPorPoblacion > 0):
                 diputado = diputadosProvinciales[provincia].pop()
-                parlamento.anadirDiputado(diputado)
+                parlamento.anadirDiputados(diputado)
                 numDiputadosPorPoblacion -= 1
 
         # Asignar los diputados restantes segun coeficientes
@@ -66,7 +54,7 @@ class LeyDHont:
         while (parlamento.asientosLibres > 0):
             (coef,provincia) = coeficientes.pop()
             diputado = diputadosProvinciales[provincia].pop()
-            parlamento.anadirDiputado(diputado)
+            parlamento.anadirDiputados(diputado)
 
         return parlamento
 

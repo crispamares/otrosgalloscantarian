@@ -2,7 +2,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 import model
-import leyDHont
+from leyDHont import *
+from leyProporcional import *
 import os
 
 loaded = False
@@ -24,7 +25,7 @@ class MainPage(webapp.RequestHandler):
             self.response.out.write("    " + escrutinio.partido + "=>")
             self.response.out.write(escrutinio.votos)
             self.response.out.write("<br />")
-    ley = leyDHont.LeyDHont(2008)
+    ley = LeyProporcional(2008)
     parlamento = ley.repartirEscanos()
     print parlamento.distribucion['parties']
     print parlamento.distribucion['color']
