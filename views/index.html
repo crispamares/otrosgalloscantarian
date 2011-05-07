@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<script src="processing.js"></script> 
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="vars.js"></script> 
+	</head>
+  <body>
+    <h1>{{ alg }} {{ selected_year }} </h1>
+    <form action="/" method="get">
+      <div>Partido<input type="text" name="partido" ></input></div>
+      <div>
+        Año<select name="year">
+          {% for year in years %}
+          <option value="{{ year }}">{{ year }}</option>
+          {% endfor %}
+          </select>
+      <div><input type="submit" value="Nuevo"></div>
+    </form>
+	<canvas data-processing-sources="parlamento.pjs"></canvas>
+    </body>
+</html>
