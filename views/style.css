@@ -292,11 +292,11 @@
 
 body{
 	font-size: 75%;
-	font-family: verdana;	
+	font-family: purisa;	
 }
 
 a {
-	color: #80638F;	
+	color: #4B385B;	
 }
 
 #pagina {
@@ -309,25 +309,51 @@ a {
 	float:left;
 	width:100%;
 	height:15em;
-	background: url("images/fondo-header.png") no-repeat scroll center top transparent;
+	background: url("fondo-header.png") no-repeat scroll center top transparent;
 }
 
 #contenido{
 	float:left;
 	width:100%;
 	margin-top:1em;
+	background: url("linea.png") repeat-y scroll left top transparent;
 }
 
 #menuLeyes{
 	float:left;
 	margin-left:2em;
-	width:16%;	
+	width:12em;	
 }
 
 #contenidoLeyes{
 	float:left;
-	width:80%;
-	border: 0.1em solid #D2D1D1;
+	width:69em;
+	border-top: 2px solid #4B385B;
+	border-right: 2px solid #4B385B;
+	border-bottom: 2px solid #4B385B;
+	-moz-border-radius-topright: 0.5em;
+	border-top-right-radius:0.5em;
+}
+
+#graficos {
+	float:left;
+	margin-left:2em;
+	margin-right:2em;
+}
+
+#descripcion {
+	float:left;
+	margin-left:2em;
+	margin-right:2em;
+	text-align:justify;
+}
+
+#descripcionmas {
+	display:none;
+}
+
+#ocultar {
+	display:none;	
 }
 
 #footer{
@@ -338,15 +364,32 @@ a {
 	border-top: 0.1em solid #D2D1D1;
 }
 
+.ley {
+	color: #000000;	
+}
+
+.leysel{
+	background: url("menu-cortado2.jpg") no-repeat scroll left top transparent;
+}
+
 .menulateral {
 	padding:0;
-	width:100%;	
+	margin:0;
+	width:100%;		
 }
 
 .menulateral li {
 	list-style-type: none;
 	list-style-image: none;
-	height:3em;	
+	height:3.5em;	
+}
+
+.enlacemenu{
+	width:100%;
+	display:block;
+	line-height:3em;
+	padding-left:1em;
+	text-decoration: none;
 }
 
 .enlacesFooter{

@@ -5,7 +5,7 @@ api_version: 1
 
 handlers:
 - url: /(.*\.(gif|png|jpg|ico))
-  static_files: views/images
+  static_files: views/images/\1
   upload: (.*\.(gif|png|jpg|ico))
 
 - url: /(.*\.(js|pjs))

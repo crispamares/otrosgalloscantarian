@@ -1,21 +1,74 @@
 <html>
 	<head>
+		<meta id="MetaDescription" name="DESCRIPTION" content="" />
+		<meta id="MetaKeywords" name="KEYWORDS" content="" />
+		<link id="default" rel="stylesheet" type="text/css" href="style.css" />
 		<script src="processing.js"></script> 
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="vars.js"></script> 
+		<script type="text/javascript" src="funciones.js"></script>
 	</head>
   <body>
-    <h1>{{ alg }} {{ selected_year }} </h1>
-    <form action="/" method="get">
-      <div>Partido<input type="text" name="partido" ></input></div>
-      <div>
-        Año<select name="year">
-          {% for year in years %}
-          <option value="{{ year }}">{{ year }}</option>
-          {% endfor %}
-          </select>
-      <div><input type="submit" value="Nuevo"></div>
-    </form>
-	<canvas data-processing-sources="parlamento.pjs"></canvas>
-    </body>
+  	<div id="pagina">
+		<div id="header">
+			<img src="pollo-gordop.jpg" alt="Otros gallos cantarían" style="margin-left:10em; margin-top:1em" />
+		</div>
+		<div id="contenido">
+			<div id="menuLeyes">
+				<ul class="menulateral">
+					<li id="leydhont" class="leysel"><a class="enlacemenu" href="#" onClick="seleccionarLeyDhont()">Ley d'hont</a></li>
+					<li id="manoli"><a class="enlacemenu" href="#" onClick="seleccionarManoli()">Ley de manoli</a></li>
+					<li id="pruebito"><a class="enlacemenu" href="#" onClick="seleccionarPruebito()">Ley de pruebito</a></li>
+				</ul>
+			</div>
+			<div id="contenidoLeyes">
+				<div id="graficos">
+				    <form action="/" method="get">
+				      <div>
+				        Año<select name="year">
+				          {% for year in years %}
+				          <option value="{{ year }}">{{ year }}</option>
+				          {% endfor %}
+				          </select>
+				        </div>
+				    </form>
+					<canvas data-processing-sources="parlamento.pjs"></canvas>
+				</div>
+				<div id="descripcion">
+					<div id="descripcioncorta">
+					<h2>Ley d'hont</h2>
+					<p>El sistema de D'Hondt es una fórmula electoral, creada por Victor d'Hondt, que permite obtener el número de cargos 
+						electos asignados a las candidaturas, en proporción a los votos conseguidos.</p>
+					</div>
+					<div id="vermas">
+						<a href="#" onClick="vermas()">Ver más</a>
+					</div>
+					<div id="ocultar">
+						<a href="#" onClick="ocultar()">Ocultar</a>
+					</div>
+					<div id="descripcionmas">
+						<p>Tras escrutar todos los votos, se calcula una serie de divisores para cada lista. La fórmula de los divisores es V/N, 
+							donde V representa el número total de votos recibidos por la lista, y N representa cada uno de los números enteros de 
+							1 hasta el número de cargos electos de la circunscripción objeto de escrutinio. Una vez realizadas las divisiones de 
+							los votos de cada candidatura por cada uno de los divisores desde 1 hasta N, la asignación de cargos electos se hace 
+							ordenando los cocientes de las divisiones de mayor a menor y asignando a cada uno un escaño hasta que éstos se 
+							agoten.</p>
+						<p>El orden en que se repartan los cargos electos a los individuos de cada lista no está dado por este sistema: puede ser 
+							una decisión interna del partido (en un sistema de listas cerradas) o puede que los votantes ejerzan alguna influencia 
+							(en un sistema de listas abiertas).</p>
+						<p>A veces, las leyes electorales fijan un porcentaje mínimo de votos tal que los partidos que no consigan alcanzar ese 
+							umbral quedan excluidos del cuerpo deliberante. En España, ese porcentaje es de 3%, aplicado a cada circunscripción 
+							electoral, provincia.</p>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div id="footer">
+			<div class="enlacesFooter">About | Código | Abredatos</div>
+			<span class="desarrolladoresFooter">Desarollado por: los gallos</span>
+		</div>
+	</div>
+</body>
 </html>
+
