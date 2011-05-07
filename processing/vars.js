@@ -3,7 +3,7 @@
  */
 var max_diameter =  350;
 
-var background_color = 50;
+var background_color = 150;
 
 var Distribution = {
 	"colors" : [[255,0,0], [123,45,78], [0,0,255]],
