@@ -8,14 +8,14 @@ loaded = False
 
 class MainPage(webapp.RequestHandler):
   def get(self):
-    self.response.headers['Content-Type'] = 'text/plain'
-    self.response.out.write('Hello, Gallo, Año Alegr&iacute;a!!\n')
+    #self.response.headers['Content-Type'] = 'text/plain'
+    self.response.out.write('Hello, Gallo!!<br />')
     censos = model.CensoElectoral.all()
     #censos.filer('municipio=','Adra')
     for censo in censos:
         self.response.out.write(censo.comunidad + ":")
         self.response.out.write(censo.provincia + ":")
-        self.response.out.write(censo.municipio + "\n")
+        self.response.out.write(censo.municipio + "<br />")
 
 application = webapp.WSGIApplication(
                                      [('/', MainPage)],
