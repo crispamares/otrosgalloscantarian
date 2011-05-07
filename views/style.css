@@ -291,8 +291,10 @@
 /**********************************/
 
 body{
-	font-size: 75%;
+	font-size: 80%;
 	font-family: purisa;	
+	margin: 0;
+	padding:0;
 }
 
 a {
@@ -312,6 +314,19 @@ a {
 	background: url("fondo-header.png") no-repeat scroll center top transparent;
 }
 
+#header-logos{
+	float:right;
+	margin-right:3em;
+	margin-top:1em;	
+}
+#header-logos a{
+	text-decoration: none;	
+}
+
+#header-logos a img{
+	border:0;
+}
+
 #contenido{
 	float:left;
 	width:100%;
@@ -322,12 +337,12 @@ a {
 #menuLeyes{
 	float:left;
 	margin-left:2em;
-	width:12em;	
+	width:11.2em;	
 }
 
 #contenidoLeyes{
 	float:left;
-	width:69em;
+	width:66em;
 	border-top: 2px solid #4B385B;
 	border-right: 2px solid #4B385B;
 	border-bottom: 2px solid #4B385B;
@@ -361,7 +376,13 @@ a {
 	width:100%;
 	margin-top:1em;
 	padding-top:1em;
-	border-top: 0.1em solid #D2D1D1;
+	border-top: 2px solid #4B385B;
+	height:55px;
+	background-color:#F0ECF4;
+}
+
+#footer-contenido{
+	margin-left:10em;
 }
 
 .ley {
@@ -394,12 +415,16 @@ a {
 
 .enlacesFooter{
 	float:left;
-	margin-left:34em;	
+	margin-left:39em;	
 }
 
 .desarrolladoresFooter {
 	float:right;
-	margin-right:1em;	
+	margin-right:12em;	
+}
+
+.enlaceBoton {
+	cursor:pointer;	
 }
 
 /*f0ecf4ff*/
