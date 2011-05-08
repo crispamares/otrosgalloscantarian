@@ -353,6 +353,7 @@ a {
 	float:left;
 	margin-left:2em;
 	margin-right:2em;
+	margin-top:1em;
 }
 
 #grafico-canvas {
@@ -442,6 +443,7 @@ a {
 	list-style-type: none;
 	list-style-image: none;
 	height:3.5em;	
+	cursor:pointer;
 }
 
 .enlacemenu{
