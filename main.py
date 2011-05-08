@@ -76,7 +76,7 @@ class MainPage(webapp.RequestHandler):
       self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
     elif( algorithm == 'ndhont'):
       params = param.split(":")
-      th = 0.03
+      th = 0.00
       if param != "":
           th = eval(params[0])
 

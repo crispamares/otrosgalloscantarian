@@ -21,11 +21,12 @@ function cambiarAno()
 
 
 function seleccionarLeyDhont(){
-	document.getElementById("leydhont").className = "leysel";	
+	document.getElementById("leydhont").className = "leysel";
+	document.getElementById("leydhontnacional").className = "ley";	
 	document.getElementById("droop").className = "ley";
 	document.getElementById("hare").className = "ley";
 	document.getElementById("imperiali").className = "ley";	
-	document.getElementById("descripcioncorta").innerHTML ="<h2>Ley d'hont</h2>" + 
+	document.getElementById("descripcioncorta").innerHTML ="<h2>Ley d'Hont</h2>" + 
 	"<p>El sistema de D'Hondt es una fórmula electoral, creada por Victor d'Hondt, que permite obtener el número de cargos electos asignados a las candidaturas, en proporción a los votos conseguidos.</p>";
 	
 	document.getElementById("descripcionmas").innerHTML = "<p>Tras escrutar todos los votos, se calcula una serie de divisores para cada lista. La fórmula de los divisores es V/N, donde V representa el número total de votos recibidos por la lista, y N representa cada uno de los números enteros de 1 hasta el número de cargos electos de la circunscripción objeto de escrutinio. Una vez realizadas las divisiones de los votos de cada candidatura por cada uno de los divisores desde 1 hasta N, la asignación de cargos electos se hace ordenando los cocientes de las divisiones de mayor a menor y asignando a cada uno un escaño hasta que éstos se agoten.</p>" +
@@ -38,8 +39,30 @@ function seleccionarLeyDhont(){
 	draw_scene(query);
 }
 
-function seleccionarDroop(){
+function seleccionarNDhont(){
 	document.getElementById("leydhont").className = "ley";	
+	document.getElementById("leydhontnacional").className = "leysel";	
+	document.getElementById("droop").className = "ley";
+	document.getElementById("hare").className = "ley";
+	document.getElementById("imperiali").className = "ley";	
+	document.getElementById("descripcioncorta").innerHTML ="<h2>Ley d'Hont Nacional (0%)</h2>" + 
+	"<p>El sistema de D'Hondt es una fórmula electoral, creada por Victor d'Hondt, que permite obtener el número de cargos electos asignados a las candidaturas, en proporción a los votos conseguidos.</p>" +
+	"<p>A diferencia de la ley actual, esta simulación considera que todos los votos pertenecen a una misma región, que es España.</p>"
+	
+	document.getElementById("descripcionmas").innerHTML = "<p>Tras escrutar todos los votos, se calcula una serie de divisores para cada lista. La fórmula de los divisores es V/N, donde V representa el número total de votos recibidos por la lista, y N representa cada uno de los números enteros de 1 hasta el número de cargos electos de la circunscripción objeto de escrutinio. Una vez realizadas las divisiones de los votos de cada candidatura por cada uno de los divisores desde 1 hasta N, la asignación de cargos electos se hace ordenando los cocientes de las divisiones de mayor a menor y asignando a cada uno un escaño hasta que éstos se agoten.</p>" +
+	"<p>El orden en que se repartan los cargos electos a los individuos de cada lista no está dado por este sistema: puede ser una decisión interna del partido (en un sistema de listas cerradas) o puede que los votantes ejerzan alguna influencia (en un sistema de listas abiertas).</p>" +
+	"<p>A veces, las leyes electorales fijan un porcentaje mínimo de votos tal que los partidos que no consigan alcanzar ese umbral quedan excluidos del cuerpo deliberante. En España, ese porcentaje es de 3%, aplicado a cada circunscripción electoral, provincia. Para esta simulación este percentaje se ha estableido al 0% ya que al eliminarse las regiones los partidos de caracter regional quedarían discriminados.</p>"
+
+	var indice = document.getElementById("select-ano").selectedIndex; 
+	var ano = document.getElementById("select-ano").options[indice].value; 
+	var query = "/?year=" + ano + "&alg=ndhont";
+	draw_scene(query);
+}
+
+
+function seleccionarDroop(){
+	document.getElementById("leydhont").className = "ley";
+	document.getElementById("leydhontnacional").className = "ley";		
 	document.getElementById("droop").className = "leysel";
 	document.getElementById("hare").className = "ley";
 	document.getElementById("imperiali").className = "ley";	
@@ -58,6 +81,7 @@ function seleccionarDroop(){
 
 function seleccionarHare(){
 	document.getElementById("leydhont").className = "ley";	
+	document.getElementById("leydhontnacional").className = "ley";	
 	document.getElementById("droop").className = "ley";
 	document.getElementById("hare").className = "leysel";
 	document.getElementById("imperiali").className = "ley";	
@@ -76,6 +100,7 @@ function seleccionarHare(){
 
 function seleccionarImperiali(){
 	document.getElementById("leydhont").className = "ley";	
+	document.getElementById("leydhontnacional").className = "ley";	
 	document.getElementById("droop").className = "ley";
 	document.getElementById("hare").className = "ley";	
 	document.getElementById("imperiali").className = "leysel";
