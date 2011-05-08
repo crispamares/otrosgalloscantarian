@@ -420,6 +420,10 @@ a {
 	padding:auto;
 }
 
+#grafico-info-adicional span{
+	display:inline-block;
+}
+
 .ley {
 	color: #000000;	
 }
@@ -472,6 +476,14 @@ a {
 	margin-right:1em;	
 	text-decoration:none;
 	float:left;
+}
+
+.partie {
+	width:10em;
+}
+
+.seleccionado {
+	background-color:#F0ECF4;
 }
 
 /*f0ecf4ff*/

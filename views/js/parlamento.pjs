@@ -29,7 +29,7 @@ void setup()
 
 void draw(){ 
     pushMatrix();
-    translate(width/2, height/2 + 100);
+    translate(width/2, height/2 + 110);
     rotate(PI);
 
 	if ( waiting ) {
@@ -97,13 +97,15 @@ void calculate_polar_coords() {
 void mouseMoved() {
     fill(0);
     
-    float [] o = {-(mouseX - width/2), -(mouseY - height/2 - 100)};
+    float [] o = {-(mouseX - width/2), -(mouseY - height/2 - 110)};
     
     float [] p = cartesian_to_polar (o[0], o[1]);
     for (int i=0; i<angs.length; i++){
 	if (p[0] >= polar_coords[i][0] && p[0] <= polar_coords[i][1] &&
 	    p[1] >= polar_coords[i][2] && p[1] <= polar_coords[i][3]) {
-	    text(i, mouseX, mouseY);
+	    //text(i, mouseX, mouseY);
+	    $("#grafico-info-adicional li").removeClass("seleccionado");
+	    $("#grafico-info-adicional #"+i ).addClass("seleccionado");
 	}
     }
 }
