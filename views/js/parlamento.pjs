@@ -27,9 +27,7 @@ void setup()
     
 }  
 
-void draw(){
-	println("draw" + waiting);
-    
+void draw(){ 
     pushMatrix();
     translate(width/2, height/2);
     rotate(PI);
@@ -74,15 +72,15 @@ void draw_arcs(int x, int y) {
 
 void draw_borders() {
     noFill();
-    stroke(255);
+    stroke(0);
     arc(0, -1, diameter, diameter, 0, PI);
     line(diameter/6 , -1, diameter/2, -1);
     line(-diameter/6, -1, -diameter/2, -1);
 
     noFill();
-    stroke(0);
-    arc(0, -1, diameter/3, diameter/3, 0, PI);
     stroke(255);
+    arc(0, -1, diameter/3, diameter/3, 0, PI);
+    stroke(0);
     arc(0, 0, diameter/3, diameter/3, 0, PI);
 
 }
