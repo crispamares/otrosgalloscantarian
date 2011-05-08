@@ -20,11 +20,11 @@ class Parlamento:
             color = [237,27,36]
         elif siglas == "PP":
             color = [0,163,224]
-        elif siglas == "IU.":
+        elif siglas == "IU":
             color = [66,169,25]
-        elif siglas == "C's":
+        elif siglas == "C'S":
             color = [255,110,45]
-        elif siglas == "CiU":
+        elif siglas == "CIU":
             color = [252,216,3]
         elif siglas == "ESQUERRA":
             color = [238,171,80]
