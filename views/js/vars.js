@@ -124,8 +124,21 @@ var draw_map_selection = function(dist, i) {
 		
 		//var svg = $('#grafico2').svg('get');
 		var r = dist.colors[i][0];
+		var margin = 50;
+		if (r > margin)
+		{
+			r = parseInt(quantity*margin + r-margin);
+		}
 		var g = dist.colors[i][1];
+		if (g > margin)
+		{
+			g = parseInt(quantity*margin + g-margin);
+		}
 		var b = dist.colors[i][2];
+		if (b > margin)
+		{
+			b = parseInt(quantity*margin + b-margin);
+		}
 		var style = preStyle + "rgb(" + r + "," + g + "," + b + ")" + postStyle;
 
 		$(place, svg.root()).attr('style', style);
