@@ -27,8 +27,15 @@ void setup()
     
 }  
 
+void init() {
+	diameter = 0;
+	angs = {};
+    background(background_color);  
+    fill(255);
+}
+
 void draw(){ 
-    pushMatrix();
+    //pushMatrix();
     translate(width/2, height/2 + 110);
     rotate(PI);
 

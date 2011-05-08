@@ -24,8 +24,7 @@ function switchSketchState(on) {
     }
 
     if (on) {
-		processingInstance.diameter = 0;
-		processingInstance.redraw();
+		//processingInstance.redraw();
         processingInstance.loop();  // call Processing loop() function
     } else {
         processingInstance.noLoop(); // stop animation, call noLoop()
@@ -41,6 +40,7 @@ var draw_scene = function(url) {
 		
 		waiting = false;
 		processingInstance = Processing.getInstanceById('parlam_canvas');
+		processingInstance.init();
 		processingInstance.calculate_angles();
 		show_info(Distribution, seats_percentages());
 	 	startSketch();
@@ -48,7 +48,7 @@ var draw_scene = function(url) {
 };
 
 $(document).ready(function(){  
-	draw_scene("/?year=2008&alg=manoli");
+	draw_scene("/?year=2008&alg=dhont");
 });
 
 
