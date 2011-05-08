@@ -18,6 +18,7 @@ from google.appengine.api import memcache
 
 from leyDHont import LeyDHont
 from leyProporcional import LeyProporcional
+from leyCoefienteDroop import LeyCoeficienteDroop
 from pucherazo import Pucherazo
 # TODO sacar una lista de los años existentes ...
 years_avaliable = [2008, 2004, 2000, 1996 ]
@@ -63,15 +64,15 @@ class MainPage(webapp.RequestHandler):
       ley = LeyDHont(year)
       ley.manipular(caciques.split(":"),pucherazo)
       parlamento = ley.repartirEscanos()
-      #parlamento = getElementCached("dhont", year, LeyDHont)
       self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
     elif(algorithm == 'manoli'):
       ley = LeyProporcional(year)
       parlamento = ley.repartirEscanos()
-      #parlamento = getElementCached("manoli", year, LeyProporcional)
       self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
-    elif(algorithm == 'dhont3'):
-      pass
+    elif(algorithm == 'droop'):
+      ley = LeyCoeficienteDroop(year)
+      parlamento = ley.repartirEscanos()
+      self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
     else:
       self.response.out.write( template.render(INDEX_PATH, template_values) )
 
