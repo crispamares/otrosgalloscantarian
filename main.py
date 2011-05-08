@@ -15,7 +15,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 
 from leyDHont import LeyDHont
-
+from leyProporcional import LeyProporcional
 years_avaliable = [2004, 2008, 2012 ]
 
 
@@ -38,8 +38,10 @@ class MainPage(webapp.RequestHandler):
       ley = LeyDHont(year)
       parlamento = ley.repartirEscanos()            
       self.response.out.write( simplejson.dumps(parlamento.distribucion) )
-    elif(algorithm == 'dhont2'):
-      pass
+    elif(algorithm == 'manoli'):
+      ley = LeyProporcional(year)
+      parlamento = ley.repartirEscanos()            
+      self.response.out.write( simplejson.dumps(parlamento.distribucion) )
     elif(algorithm == 'dhont3'):
       pass
           

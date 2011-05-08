@@ -1,10 +1,13 @@
-
 int diameter = 0;
-float[] percentages = seats_percentages();
 
 int[] angs = {};
-for (int i = 0; i < percentages.length; i++) {
-    angs[i] = percentages[i] * PI / 100;
+
+void calculate_angles() {
+	float[] percentages = seats_percentages();
+
+	for (int i = 0; i < percentages.length; i++) {
+    	angs[i] = percentages[i] * PI / 100;
+	}
 }
 
 float easing = 0.1;
@@ -20,13 +23,21 @@ void setup()
     textFont(fontA, 14);    
     smooth();  
     noStroke();
+    noLoop();
+    
 }  
 
 void draw(){
-
+	println("draw" + waiting);
+    
     pushMatrix();
     translate(width/2, height/2);
     rotate(PI);
+
+	if ( waiting ) {
+				
+		return;
+	}
 
     int step = max_diameter - diameter;
     if (abs(step) > 1) { 

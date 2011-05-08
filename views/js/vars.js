@@ -2,21 +2,55 @@
  * @author crispamares
  */
 
-var Distribution = {"colors" : [[255,0,0], [123,45,78], [0,0,255]],
-"seats" : [25, 75, 30],
-"total_seats" : 130
+
+var Distribution = {};
+
+var waiting = true;
+
+
+var processingInstance;
+
+function startSketch() {
+    switchSketchState(true);
 }
 
-/*
-$.getJSON("http://localhost:8080/?year=2005&alg=dhont", function(json) {
+function stopSketch() {
+    switchSketchState(false);
+}
+
+function switchSketchState(on) {
+    if (!processingInstance) {
+        processingInstance = Processing.getInstanceById('parlam_canvas');
+    }
+
+    if (on) {
+		processingInstance.diameter = 0;
+		processingInstance.redraw();
+        processingInstance.loop();  // call Processing loop() function
+    } else {
+        processingInstance.noLoop(); // stop animation, call noLoop()
+    }
+}
+
+var draw_scene = function(url) {
+		$.getJSON(url, function(json) {
 		Distribution.colors = json.colors;
 		Distribution.seats = json.seats;
 		Distribution.total_seats = json.total_seats;
-	 });
-	
+		
+		waiting = false;
+		processingInstance = Processing.getInstanceById('parlam_canvas');
+		processingInstance.calculate_angles();
+	 	startSketch();
+	 });	
+};
+
 $(document).ready(function(){  
-	});
-*/
+	draw_scene("http://localhost:8080/?year=2008&alg=manoli");
+});
+
+
+
 var max_diameter =  350;
 
 var background_color = 0;
@@ -29,3 +63,5 @@ var seats_percentages = function() {
 	}
 	return percentages;
 };
+
+
