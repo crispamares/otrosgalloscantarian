@@ -485,6 +485,9 @@ a {
 	width:10em;
 }
 
+.partie_bars {
+	width:7.5em;
+}
 .seleccionado {
 	background-color:#F0ECF4;
 }

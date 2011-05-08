@@ -70,7 +70,7 @@ var show_info = function (desc, percentages) {
 	for (i=0; i < desc.parties.length; i += 1) {
 		info_str += "<li id="+i+">";
 		info_str += "<span class=partie>"+desc.parties[i]+": ["+desc.seats[i]+"]</span>" ;
-		info_str += "<span style=background-color:rgb("+desc.colors[i].toString()+");width:"+Math.ceil(percentages[i])+"%>&nbsp;</span>";
+		info_str += "<span class=partie_bars><span style=background-color:rgb("+desc.colors[i].toString()+");width:"+Math.ceil(percentages[i]*1.5)+"%>&nbsp;</span></span>";
 		info_str += "</li> ";		
 	}
 	info_str += "</ul>";
