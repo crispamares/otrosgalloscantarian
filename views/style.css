@@ -345,7 +345,6 @@ a {
 	width:66em;
 	border-top: 2px solid #4B385B;
 	border-right: 2px solid #4B385B;
-	border-bottom: 2px solid #4B385B;
 	-moz-border-radius-topright: 0.5em;
 	border-top-right-radius:0.5em;
 }
@@ -367,14 +366,31 @@ a {
 	display:none;
 }
 
+#vermas {
+	width:100%;	
+	float:left;
+}
+
+#ocultar {
+	width:100%;
+	float:left;	
+}
+
 #ocultar {
 	display:none;	
 }
 
+#prefooter{
+	float:left;
+	width:100%;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+	height:30px;
+	background-color:#4B385B;
+}
 #footer{
 	float:left;
 	width:100%;
-	margin-top:1em;
 	padding-top:1em;
 	border-top: 2px solid #4B385B;
 	height:55px;
@@ -415,7 +431,7 @@ a {
 
 .enlacesFooter{
 	float:left;
-	margin-left:39em;	
+	margin-left:37em;	
 }
 
 .desarrolladoresFooter {
@@ -425,6 +441,20 @@ a {
 
 .enlaceBoton {
 	cursor:pointer;	
+	float:left;
+	margin-bottom: 1em;
+	background: url("boton.png") no-repeat scroll left top transparent;
+	width:8em;
+	height:2.5em;
+}
+
+.enlace-correo {
+	color:#FFFFFF; 
+	margin-left:23em;
+	float:left; 
+	line-height:2.5em; 
+	margin-right:1em;	
+	text-decoration:none;
 }
 
 /*f0ecf4ff*/
