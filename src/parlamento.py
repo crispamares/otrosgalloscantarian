@@ -5,8 +5,18 @@ class Parlamento:
         self.distribucion = {'parties':[],'seats':[],'colors':[],'total_seats':numDiputados}
         self.escanos = {}
         self.asientosLibres = numDiputados
+        
     def colorPartido(self, partido):
-        return [len(partido)%256,self.escanos[partido]%256,255]
+        color = []
+        if partido == "UPyD":
+            color = [229,0,131]
+        elif partido == "P.S.O.E.":
+            color = [237,27,36]
+        elif partido == "P.P.":
+            color = [0,163,224]
+        else:
+            color = [(len(partido)*3)%256,(self.escanos[partido]*len(partido))%256,255]
+        return color
 
     def anadirDiputados(self, diputado, numDiputados=1):
         partido = diputado[1]

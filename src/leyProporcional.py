@@ -28,11 +28,14 @@ class LeyProporcional:
             memcache.add(self.key+"VotosCandidaturas",votos)
             memcache.add(self.key+"TotalVotos",totalVotos)
 
-        # Repartir votos proporcionalmente
+        # Repeartir votos proporcionalmente
+        totalEscanos = parlamento.asientosLibres
         for partido in votos:
-            numDiputados = round(1.0 * votos[partido] * parlamento.asientosLibres / totalVotos);
+            numDiputados = round(1.0 * votos[partido] * totalEscanos / totalVotos);
             if (numDiputados > 0):
                 parlamento.anadirDiputados(("fake",partido),numDiputados)
+        
+        parlamento.anadirDiputados((None,"Libres"), parlamento.asientosLibres)               
 
         return parlamento
 
