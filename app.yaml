@@ -20,6 +20,10 @@ handlers:
   static_files: views/purisa/\1
   upload: (.*\.(ttf))
 
+- url: /(.*\.(svg))
+  static_files: views/images/svg/\1
+  upload: (.*\.(svg))
+
 
 - url: .*
   script: main.py
