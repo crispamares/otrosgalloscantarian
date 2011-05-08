@@ -16,6 +16,10 @@ handlers:
   static_files: views/\1
   upload: (.*\.(css))
 
+- url: /(.*\.(ttf))
+  static_files: views/purisa/\1
+  upload: (.*\.(ttf))
+
 
 - url: .*
   script: main.py
