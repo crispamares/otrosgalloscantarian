@@ -16,7 +16,7 @@ class Parlamento:
         siglas = mayusculas.replace(".","")
         if siglas == "UPYD":
             color = [229,0,131]
-        elif siglas == "PSOE":
+        elif siglas.find("PSOE") >= 0:
             color = [237,27,36]
         elif siglas == "PP":
             color = [0,163,224]

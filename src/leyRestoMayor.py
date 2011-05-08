@@ -6,7 +6,7 @@ class LeyRestoMayor:
     def __init__(self,ano,cociente):
         self.censos = model.CensoElectoral.all()
         self.censos.filter("ano =",ano)
-        self.key = "LeyRestoMayor"+ano
+        self.key = "VotosNacionales"+ano
 
         self.cociente = None
         if cociente == 'Hare':

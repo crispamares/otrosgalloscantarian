@@ -14,7 +14,7 @@ class LeyDHont:
         self.ano = ano
         self.censos = model.CensoElectoral.all()
         self.censos.filter("ano =",ano)
-        self.key = "LeyDHont"+ano
+        self.key = "VotosProvinciales"+ano
         self.pucherazo = None
         self.caciques = []
         self.geolocalizacionEscanos = {}
