@@ -2,36 +2,42 @@ import random
 
 class Parlamento:
     def __init__(self, numDiputados):
-        self.distribucion = {'parties':[],'seats':[],'colors':[],'total_seats':numDiputados}
+        self.distribucion = {'parties':[],'places':[],'seats':[],'colors':[],'total_seats':numDiputados}
         self.escanos = {}
         self.asientosLibres = numDiputados
-        
+        self.geolocalizacion = None
+
+    def geolocalizar(self, geolocalizacionVotos):
+        self.geolocalizacion = geolocalizacionVotos
+
     def colorPartido(self, partido):
         color = []
-        if partido == "UPyD":
+        mayusculas = partido.upper()
+        siglas = mayusculas.replace(".","")
+        if siglas == "UPYD":
             color = [229,0,131]
-        elif partido == "P.S.O.E.":
+        elif siglas.find("PSOE") >= 0:
             color = [237,27,36]
-        elif partido == "P.P.":
+        elif siglas == "PP":
             color = [0,163,224]
-        elif partido == "I.U.":
+        elif siglas == "IU.":
             color = [66,169,25]
-        elif partido == "C's":
+        elif siglas == "C's":
             color = [255,110,45]
-        elif partido == "CiU":
+        elif siglas == "CiU":
             color = [252,216,3]
-        elif partido == "ESQUERRA":
+        elif siglas == "ESQUERRA":
             color = [238,171,80]
-        elif partido == "EAJ-PNV" or partido == "PNV":
+        elif siglas == "EAJ-PNV" or siglas == "PNV":
             color = [42,133,81]
-        elif partido == "Libres":
+        elif siglas == "Libres":
             color = [255,255,255]
-        elif partido == "B.N.G.":
+        elif siglas == "BNG":
             color = [148,187,225]
-        elif partido == "CC-PNC":
+        elif siglas == "CC-PNC":
             color = [4,116,190]
-        elif partido == "VERDES":
-            color = [34,132,29]            
+        elif siglas == "VERDES":
+            color = [34,132,29]
         else:
             color = [random.randrange(0,255), random.randrange(0,255), random.randrange(0,255)]
         return color
@@ -47,11 +53,12 @@ class Parlamento:
     def configuracion(self):
         emparejados = []
         for partido in self.escanos:
-            emparejados += [(self.escanos[partido],partido,self.colorPartido(partido))]
+            emparejados += [(self.escanos[partido],partido,self.colorPartido(partido),self.geolocalizacion[partido])]
         emparejados.sort()
         emparejados.reverse()
         for i in range(0,len(emparejados)):
             self.distribucion['parties'] += [emparejados[i][1]]
             self.distribucion['seats'] += [emparejados[i][0]]
             self.distribucion['colors'] += [emparejados[i][2]]
+            self.distribucion['places'] += [emparejados[i][3]]
         return self.distribucion

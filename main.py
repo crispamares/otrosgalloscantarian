@@ -17,8 +17,11 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import memcache
 
 from leyDHont import LeyDHont
+from leyNacionalDHont import LeyNacionalDHont
 from leyProporcional import LeyProporcional
 from leyCoefienteDroop import LeyCoeficienteDroop
+from leyRestoMayor import LeyRestoMayor
+
 from pucherazo import Pucherazo
 # TODO sacar una lista de los años existentes ...
 years_avaliable = [2008, 2004, 2000, 1996 ]
@@ -71,12 +74,26 @@ class MainPage(webapp.RequestHandler):
       ley.manipular(caciques.split(":"),pucherazo)
       parlamento = ley.repartirEscanos()
       self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
+    elif( algorithm == 'ndhont'):
+      params = param.split(":")
+      th = 0.03
+      if param != "":
+          th = eval(params[0])
+
+      ley = LeyNacionalDHont(year,th)
+      ley.manipular(caciques.split(":"),pucherazo)
+      parlamento = ley.repartirEscanos()
+      self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
     elif(algorithm == 'manoli'):
       ley = LeyProporcional(year)
       parlamento = ley.repartirEscanos()
       self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
     elif(algorithm == 'droop'):
       ley = LeyCoeficienteDroop(year)
+      parlamento = ley.repartirEscanos()
+      self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
+    elif(algorithm == 'Droop' or algorithm == 'Hare' or algorithm == 'Imperiali'):
+      ley = LeyRestoMayor(year,algorithm)
       parlamento = ley.repartirEscanos()
       self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
     else:

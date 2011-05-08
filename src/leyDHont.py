@@ -14,9 +14,28 @@ class LeyDHont:
         self.ano = ano
         self.censos = model.CensoElectoral.all()
         self.censos.filter("ano =",ano)
-        self.key = "LeyDHont"+ano
+        self.key = "VotosProvinciales"+ano
         self.pucherazo = None
         self.caciques = []
+        self.geolocalizacionEscanos = {}
+
+    def geolocalizarEscanos(self,diputado,provincia,numEscanos):
+        partido = diputado[1]
+
+        # La primera vez que se registra un partido se inicia su key
+        if partido not in self.geolocalizacionEscanos:
+            self.geolocalizacionEscanos[partido] = []
+
+        # Comprobamos si ya se ha votado anteriormente a ese partido en la
+        # provincia
+        for i in range(0,len(self.geolocalizacionEscanos[partido])):
+            # En caso de ser asi, se incrementa y se devuelve la funcion
+            if self.geolocalizacionEscanos[partido][i][0] == provincia:
+                self.geolocalizacionEscanos[partido][i][1] += numEscanos
+                return
+        # En caso de ser la primera vez que se vota en la provincia
+        # se incrementan los escanos
+        self.geolocalizacionEscanos[partido] += [[provincia,numEscanos]]
 
     def manipular(self, caciques, pucherazo):
         self.caciques = caciques
@@ -42,9 +61,11 @@ class LeyDHont:
             # Se elijen dos diputados de cada provincia a excepcion de ceuta y melilla
             diputado = diputadosProvinciales[provincia].pop()
             parlamento.anadirDiputados(diputado)
+            self.geolocalizarEscanos(diputado,provincia,1)
             if (provincia != "Ceuta" and provincia != "Melilla"):
                 diputado = diputadosProvinciales[provincia].pop()
                 parlamento.anadirDiputados(diputado)
+                self.geolocalizarEscanos(diputado,provincia,1)
 
         # Asignar diputados por poblacion
         cuotaReparto = 1.0 * poblacionDeDerecho / parlamento.asientosLibres
@@ -60,6 +81,7 @@ class LeyDHont:
             while (numDiputadosPorPoblacion > 0):
                 diputado = diputadosProvinciales[provincia].pop()
                 parlamento.anadirDiputados(diputado)
+                self.geolocalizarEscanos(diputado,provincia,1)
                 numDiputadosPorPoblacion -= 1
 
         # Asignar los diputados restantes segun coeficientes
@@ -68,6 +90,10 @@ class LeyDHont:
             (coef,provincia) = coeficientes.pop()
             diputado = diputadosProvinciales[provincia].pop()
             parlamento.anadirDiputados(diputado)
+            self.geolocalizarEscanos(diputado,provincia,1)
+
+        #print self.geolocalizacionEscanos['CiU']
+        parlamento.geolocalizar(self.geolocalizacionEscanos)
 
         return parlamento
 
