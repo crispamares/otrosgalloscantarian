@@ -1,8 +1,7 @@
 import model
 import math
 from parlamento import *
-
-
+from google.appengine.api import memcache
 
 class LeyDHont:
     def __init__(self, ano):
@@ -10,6 +9,13 @@ class LeyDHont:
         self.threshold = 0.03
         self.censos = model.CensoElectoral.all()
         self.censos.filter("ano =",ano)
+        self.key = "LeyDHont"+ano
+        self.pucherazo = None
+        self.caciques = []
+
+    def manipular(self, caciques, pucherazo):
+        self.caciques = caciques
+        self.pucherazo = pucherazo
 
     def repartirEscanos(self):
         parlamento = Parlamento(350)
@@ -58,20 +64,30 @@ class LeyDHont:
 
         return parlamento
 
-
     # Devuelve la lista de candidaturas que alcanzan el porcentaje
     # minimo establecido por la ley d'Hont
     def candidaturasMayoritarias(self, censoProvincia):
-        escrutinios = model.Escrutinio.all()
-        escrutinios.filter("censo  =",censoProvincia)
-        candidaturas = {}
+        keyProvincia = self.key+censoProvincia.provincia
+        votos = memcache.get(keyProvincia)
+        if votos is None:
+            escrutinios = model.Escrutinio.all()
+            escrutinios.filter("censo  =",censoProvincia)
+            votos = {}
+            for escrutinio in escrutinios:
+                votos[escrutinio.partido] = escrutinio.votos
+            memcache.add(keyProvincia,votos)
+        # Filtrar candidaturas que no alcanzan el threshold de la ley
         totalVotos = censoProvincia.votosTotales
-        for escrutinio in escrutinios:
-            if ((1.0*escrutinio.votos/totalVotos) > self.threshold):
-                candidaturas[escrutinio.partido] = escrutinio.votos
-        #print "+++++++++++++++++++++++++++++++"
-        #print censoProvincia.provincia, "=>", candidaturas
-        return candidaturas
+
+        if self.pucherazo is not None:
+            #print "Dando pucherazo!"
+            votosBlanco = censoProvincia.votosBlanco
+            votos = self.pucherazo.darPucherazo(votos,votosBlanco,self.caciques)
+        candidaturasValidas = {}
+        for partido in votos:
+            if ((1.0*votos[partido]/totalVotos) > self.threshold):
+                candidaturasValidas[partido] = votos[partido]
+        return candidaturasValidas
 
 
     # Calcula los coeficientes de cada candidatura

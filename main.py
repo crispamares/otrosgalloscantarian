@@ -10,6 +10,7 @@ sys.path.append(os.path.join(ROOT, "src"))
 
 import model
 import simplejson
+
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
@@ -17,6 +18,7 @@ from google.appengine.api import memcache
 
 from leyDHont import LeyDHont
 from leyProporcional import LeyProporcional
+from pucherazo import Pucherazo
 # TODO sacar una lista de los años existentes ...
 years_avaliable = [2008, 2004, 2000, 1996 ]
 
@@ -40,27 +42,36 @@ class MainPage(webapp.RequestHandler):
     year = self.request.get('year', "")
     algorithm = self.request.get('alg', "")
     flush_cache = self.request.get('flushcache', False)
-    
+    hacerPucherazo = self.request.get('pucherazo',False)
+    caciques = self.request.get('caciques','')
+
     if flush_cache:
         memcache.flush_all()
-    
+
     # Read the avaliable years form model
     model.CensoElectoral.all()
     template_values = { 'years': years_avaliable,
             'selected_year': year,
             'alg': algorithm,
             }
-    
+
+    pucherazo = None
+    if hacerPucherazo == "True":
+        pucherazo = Pucherazo()
+
     if( algorithm == 'dhont'):
-      # TODO load from db
-      parlamento = getElementCached("dhont", year, LeyDHont)
+      ley = LeyDHont(year)
+      ley.manipular(caciques.split(":"),pucherazo)
+      parlamento = ley.repartirEscanos()
+      #parlamento = getElementCached("dhont", year, LeyDHont)
       self.response.out.write( simplejson.dumps(parlamento.distribucion) )
     elif(algorithm == 'manoli'):
-      parlamento = getElementCached("manoli", year, LeyProporcional)
+      ley = LeyProporcional(year)
+      parlamento = ley.repartirEscanos()
+      #parlamento = getElementCached("manoli", year, LeyProporcional)
       self.response.out.write( simplejson.dumps(parlamento.distribucion) )
     elif(algorithm == 'dhont3'):
       pass
-          
     else:
       self.response.out.write( template.render(INDEX_PATH, template_values) )
 
