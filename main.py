@@ -17,6 +17,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import memcache
 
 from leyDHont import LeyDHont
+from leyNacionalDHont import LeyNacionalDHont
 from leyProporcional import LeyProporcional
 from leyCoefienteDroop import LeyCoeficienteDroop
 from leyRestoMayor import LeyRestoMayor
@@ -70,6 +71,16 @@ class MainPage(webapp.RequestHandler):
           th = eval(params[0])
 
       ley = LeyDHont(year,th)
+      ley.manipular(caciques.split(":"),pucherazo)
+      parlamento = ley.repartirEscanos()
+      self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
+    elif( algorithm == 'ndhont'):
+      params = param.split(":")
+      th = 0.03
+      if param != "":
+          th = eval(params[0])
+
+      ley = LeyNacionalDHont(year,th)
       ley.manipular(caciques.split(":"),pucherazo)
       parlamento = ley.repartirEscanos()
       self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
