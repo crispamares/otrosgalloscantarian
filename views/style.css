@@ -355,6 +355,17 @@ a {
 	margin-right:2em;
 }
 
+#grafico-canvas {
+	clear: left;
+	float:left;	
+}
+
+#grafico-info-adicional{
+	float:left;
+	margin-left:1em;
+	width:21em;
+}
+
 #descripcion {
 	float:left;
 	margin-left:2em;
