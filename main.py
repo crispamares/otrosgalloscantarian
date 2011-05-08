@@ -39,6 +39,10 @@ class MainPage(webapp.RequestHandler):
     # If there is GET/POST data, retrieve it
     year = self.request.get('year', "")
     algorithm = self.request.get('alg', "")
+    flush_cache = self.request.get('flushcache', False)
+    
+    if flush_cache:
+        memcache.flush_all()
     
     # Read the avaliable years form model
     model.CensoElectoral.all()
