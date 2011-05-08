@@ -13,7 +13,7 @@ class LeyNacionalDHont:
         self.ano = ano
         self.censos = model.CensoElectoral.all()
         self.censos.filter("ano =",ano)
-        self.key = "LeyNacnionalDHont"+ano
+        self.key = "VotosNacionales"+ano
         self.pucherazo = None
         self.caciques = []
         self.totalVotos = 0
