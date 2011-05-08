@@ -368,6 +368,11 @@ a {
 	width:21em;
 }
 
+#grafico2{
+	clear:left;
+	float:left;	
+}
+
 #descripcion {
 	float:left;
 	margin-left:2em;
