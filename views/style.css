@@ -422,6 +422,14 @@ a {
 	padding:auto;
 }
 
+#grafico-info-adicional li{
+	list-style:none;
+}
+
+#grafico-info-adicional ul{
+	padding-left:0.5em;
+}
+
 #grafico-info-adicional span{
 	display:inline-block;
 }
@@ -486,10 +494,11 @@ a {
 }
 
 .partie_bars {
-	width:7.5em;
+	width:10.5em;
 }
 .seleccionado {
-	background-color:#F0ECF4;
+	background-color:#4B385B;
+	color:#FFF;
 }
 
 /*f0ecf4ff*/

@@ -54,7 +54,7 @@ $(document).ready(function(){
 
 var max_diameter =  450;
 
-var background_color = 245;
+var background_color = 255;
 	
 var seats_percentages = function() {
 	var percentages = [];
