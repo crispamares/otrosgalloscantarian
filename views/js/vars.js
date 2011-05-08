@@ -49,6 +49,7 @@ var draw_scene = function(url) {
 
 $(document).ready(function(){  
 	draw_scene("/?year=2008&alg=dhont");
+	draw_map(Distribution);
 });
 
 
@@ -77,4 +78,14 @@ var show_info = function (desc, percentages) {
 	$("#grafico-info-adicional").html(info_str);
 };
 
+var draw_map = function(dist) {
+    var svg = $('#grafico2').svg({loadURL: 'lion.svg'});
+	
+	
+};
 
+var select_partie = function (i) {
+    $("#grafico-info-adicional li").removeClass("seleccionado");
+    $("#grafico-info-adicional #"+i ).addClass("seleccionado");
+	//draw_map(Distribution);
+};
