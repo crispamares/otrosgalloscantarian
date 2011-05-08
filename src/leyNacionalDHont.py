@@ -8,7 +8,7 @@ from escanosProv2008 import escanosProvincia2008
 
 
 class LeyNacionalDHont:
-    def __init__(self, ano, th=0.03):
+    def __init__(self, ano, th=0.00):
         self.threshold = th
         self.ano = ano
         self.censos = model.CensoElectoral.all()
