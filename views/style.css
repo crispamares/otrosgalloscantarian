@@ -311,7 +311,7 @@ a {
 #header{
 	float:left;
 	width:100%;
-	height:15em;
+	height:14em;
 	background: url("fondo-header.png") no-repeat scroll center top transparent;
 }
 
@@ -326,6 +326,21 @@ a {
 
 #header-logos a img{
 	border:0;
+}
+
+#introduccion{
+	margin-left:2em;
+	float:left;
+	width:77em;	
+	border: 2px solid #4B385B;
+	-moz-border-radius: 0.5em;
+	border-radius:0.5em;
+	background-color: #F0ECF4;
+}
+
+#introduccion-contenido{
+	margin-left:1em;
+	margin-right:1em;
 }
 
 #contenido{
@@ -417,7 +432,7 @@ a {
 	float:left;
 	width:100%;
 	border-top: 2px solid #4B385B;
-	height:55px;
+	height:75px;
 	background-color:#F0ECF4;
 }
 
@@ -508,7 +523,7 @@ a {
 
 #grafico2 {
 	width: 800px;
-	height: 800px;
+	height: 600px;
 }
 
 /*f0ecf4ff*/

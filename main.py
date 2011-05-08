@@ -99,10 +99,14 @@ class MainPage(webapp.RequestHandler):
     else:
       self.response.out.write( template.render(INDEX_PATH, template_values) )
 
+class About(webapp.RequestHandler):
+    def get(self):
+        self.response.out.write( template.render(os.path.join(ROOT, 'views', 'about.html'), {}))
 
 
 application = webapp.WSGIApplication(
      [('/', MainPage),
+      ('/about.html', About),
       ],
       debug = True)
 run_wsgi_app(application)

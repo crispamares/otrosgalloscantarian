@@ -29,6 +29,12 @@
 			</div>
 			<img src="gallo-header.png" alt="Otros gallos cantarían" style="margin-left:9em; margin-top:1em" />
 		</div>
+		<div id="introduccion">
+			<div id="introduccion-contenido">
+				<p>La actual ley electoral española utiliza un sistema de reparto de escaños según el <b>sistema de D’Hondt</b>. Se trata de un método de reparto de escaños, no exactamente proporcional, de un proceso electoral, que favorece la creación de mayorías para gobernar y evita que las cámaras queden demasiado fraccionadas.</p>
+				<p><a href="about.html">Este proyecto</a> trata de mostrar qué efectos tendría utilizar <b>diferentes sistemas electorales</b> al actual, tales como la ley d'Hont a nivel nacional y el método del resto mayor con diferentes cocientes: Droop, Hare e Imperiali.</p>
+			</div>	
+		</div>
 		<div id="contenido">
 			<div id="menuLeyes">
 				<ul class="menulateral">
@@ -44,7 +50,7 @@
 				<div id="graficos">
 				    <form id="formulario" action="/" method="get">
 				      <div>
-				        Seleccione el año: <select onchange="cambiarAno()" id="select-ano" name="select-ano">
+				        Resultados electorales del año: <select onchange="cambiarAno()" id="select-ano" name="select-ano">
 				          {% for year in years %}
 				          <option value="{{ year }}">{{ year }}</option>
 				          {% endfor %}
@@ -108,7 +114,7 @@
 	</div>
 	<div id="footer">
 		<div id="footer-contenido">
-			<div class="enlacesFooter"><p style="margin-left:36em;">About | <a href="https://github.com/crispamares/otrosgalloscantarian" target="_blank" title="Código del proyecto">Código</a> | <a href="http://www.abredatos.es/" target="_blank" title="Desafío abredatos 2011">Abredatos</a><p></div>
+			<div class="enlacesFooter"><p style="margin-left:36em;"><a href="about.html">About</a> | <a href="https://github.com/crispamares/otrosgalloscantarian" target="_blank" title="Código del proyecto">Código</a> | <a href="http://www.abredatos.es/" target="_blank" title="Desafío abredatos 2011">Abredatos</a><p></div>
 			<span class="desarrolladoresFooter"><p>Desarollado por: los gallos</p></span>
 		</div>
 	</div>
