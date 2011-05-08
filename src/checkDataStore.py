@@ -28,7 +28,7 @@ class MainPage(webapp.RequestHandler):
     ley = LeyProporcional(2008)
     parlamento = ley.repartirEscanos()
     print parlamento.distribucion['parties']
-    print parlamento.distribucion['color']
+    print parlamento.distribucion['colors']
     print parlamento.distribucion['seats']
     print parlamento.distribucion['total_seats']
     #self.response.out.write(parlamento.distribucion['parties'][0])

@@ -398,14 +398,15 @@ a {
 #footer{
 	float:left;
 	width:100%;
-	padding-top:1em;
 	border-top: 2px solid #4B385B;
 	height:55px;
 	background-color:#F0ECF4;
 }
 
 #footer-contenido{
-	margin-left:10em;
+	width:1024px;
+	margin:auto;
+	padding:auto;
 }
 
 .ley {
@@ -438,12 +439,11 @@ a {
 
 .enlacesFooter{
 	float:left;
-	margin-left:37em;	
 }
 
 .desarrolladoresFooter {
 	float:right;
-	margin-right:12em;	
+	margin-right:2em;	
 }
 
 .enlaceBoton {

@@ -13,11 +13,25 @@ import simplejson
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
+from google.appengine.api import memcache
 
 from leyDHont import LeyDHont
 from leyProporcional import LeyProporcional
-years_avaliable = [2004, 2008, 2012 ]
+# TODO sacar una lista de los años existentes ...
+years_avaliable = [2008, 2004, 2000, 1996 ]
 
+
+def getElementCached(nombreLey, year, leyElectoral):
+  key = nombreLey+year
+  parlamento = memcache.get(key)
+  if parlamento is not None:
+    return parlamento
+  else:
+    ley = leyElectoral(year)
+    parlamento = ley.repartirEscanos()
+    memcache.add(key, parlamento)
+    return parlamento
+    
 
 class MainPage(webapp.RequestHandler):
   
@@ -35,12 +49,10 @@ class MainPage(webapp.RequestHandler):
     
     if( algorithm == 'dhont'):
       # TODO load from db
-      ley = LeyDHont(year)
-      parlamento = ley.repartirEscanos()            
+      parlamento = getElementCached("dhont", year, LeyDHont)
       self.response.out.write( simplejson.dumps(parlamento.distribucion) )
     elif(algorithm == 'manoli'):
-      ley = LeyProporcional(year)
-      parlamento = ley.repartirEscanos()            
+      parlamento = getElementCached("manoli", year, LeyProporcional)
       self.response.out.write( simplejson.dumps(parlamento.distribucion) )
     elif(algorithm == 'dhont3'):
       pass
