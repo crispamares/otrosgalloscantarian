@@ -42,6 +42,7 @@ var draw_scene = function(url) {
 		waiting = false;
 		processingInstance = Processing.getInstanceById('parlam_canvas');
 		processingInstance.calculate_angles();
+		show_info(Distribution, seats_percentages());
 	 	startSketch();
 	 });	
 };
@@ -51,7 +52,7 @@ $(document).ready(function(){
 });
 
 
-var max_diameter =  350;
+var max_diameter =  450;
 
 var background_color = 245;
 	
@@ -62,6 +63,18 @@ var seats_percentages = function() {
 		percentages.push(100.0 * Distribution.seats[i] / Distribution.total_seats);
 	}
 	return percentages;
+};
+
+var show_info = function (desc, percentages) {
+	var info_str = "<ul>";
+	for (i=0; i < desc.parties.length; i += 1) {
+		info_str += "<li id="+i+">";
+		info_str += "<span class=partie>"+desc.parties[i]+": ["+desc.seats[i]+"]</span>" ;
+		info_str += "<span style=background-color:rgb("+desc.colors[i].toString()+");width:"+Math.ceil(percentages[i])+"%>&nbsp;</span>";
+		info_str += "</li> ";		
+	}
+	info_str += "</ul>";
+	$("#grafico-info-adicional").html(info_str);
 };
 
 
