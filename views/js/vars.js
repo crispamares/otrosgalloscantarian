@@ -37,6 +37,7 @@ var draw_scene = function(url) {
 		Distribution.colors = json.colors;
 		Distribution.seats = json.seats;
 		Distribution.total_seats = json.total_seats;
+		Distribution.parties = json.parties;
 		
 		waiting = false;
 		processingInstance = Processing.getInstanceById('parlam_canvas');
@@ -46,7 +47,7 @@ var draw_scene = function(url) {
 };
 
 $(document).ready(function(){  
-	draw_scene("http://localhost:8080/?year=2008&alg=manoli");
+	draw_scene("/?year=2008&alg=manoli");
 });
 
 
