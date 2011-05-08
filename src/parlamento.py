@@ -50,10 +50,24 @@ class Parlamento:
             self.escanos[partido] += numDiputados
         self.asientosLibres -= numDiputados
 
+    def sanitize(self,provincia):
+        prov = provincia.replace(' ','_')
+        prov = prov.replace('/','-')
+        while prov.find('&') >= 0:
+            i = prov.find('&')
+            prov = prov.replace(prov[i:i+1],'')
+            j = prov.find(';')
+            prov = prov.replace(prov[i+1:j+1],'')
+        return prov
+
     def configuracion(self):
         emparejados = []
         for partido in self.escanos:
-            emparejados += [(self.escanos[partido],partido,self.colorPartido(partido),self.geolocalizacion[partido])]
+            provVotadas = self.geolocalizacion[partido]
+            for i in range(0,len(provVotadas)):
+                provVotadas[i][0] = self.sanitize(provVotadas[i][0])
+            emparejados += [(self.escanos[partido],partido,self.colorPartido(partido),provVotadas)]
+
         emparejados.sort()
         emparejados.reverse()
         for i in range(0,len(emparejados)):
