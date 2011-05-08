@@ -64,12 +64,12 @@ class MainPage(webapp.RequestHandler):
       ley.manipular(caciques.split(":"),pucherazo)
       parlamento = ley.repartirEscanos()
       #parlamento = getElementCached("dhont", year, LeyDHont)
-      self.response.out.write( simplejson.dumps(parlamento.distribucion) )
+      self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
     elif(algorithm == 'manoli'):
       ley = LeyProporcional(year)
       parlamento = ley.repartirEscanos()
       #parlamento = getElementCached("manoli", year, LeyProporcional)
-      self.response.out.write( simplejson.dumps(parlamento.distribucion) )
+      self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
     elif(algorithm == 'dhont3'):
       pass
     else:
