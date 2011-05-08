@@ -76,7 +76,7 @@ class LeyDHont:
 
     # Calcula los coeficientes de cada candidatura
     def asignarDiputados(self, candidaturas):
-        numDiputados = 10 #numDiputados(provincia)
+        numDiputados = 15 #numDiputados(provincia)
         diputados = []
         # Divide los votos entre el numero de diputados de la provincia
         for partido in candidaturas:
