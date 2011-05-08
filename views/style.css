@@ -388,6 +388,13 @@ a {
 	height:30px;
 	background-color:#4B385B;
 }
+
+#prefooter-contenido{
+	width:1024px;
+	margin:auto;
+	padding:auto;	
+}
+
 #footer{
 	float:left;
 	width:100%;
@@ -450,11 +457,10 @@ a {
 
 .enlace-correo {
 	color:#FFFFFF; 
-	margin-left:23em;
-	float:left; 
-	line-height:2.5em; 
+	line-height:3em; 
 	margin-right:1em;	
 	text-decoration:none;
+	float:left;
 }
 
 /*f0ecf4ff*/
