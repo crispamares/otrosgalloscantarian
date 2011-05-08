@@ -37,6 +37,7 @@ var draw_scene = function(url) {
 		Distribution.seats = json.seats;
 		Distribution.total_seats = json.total_seats;
 		Distribution.parties = json.parties;
+		Distribution.places = json.places;
 		
 		waiting = false;
 		processingInstance = Processing.getInstanceById('parlam_canvas');
@@ -49,7 +50,7 @@ var draw_scene = function(url) {
 
 $(document).ready(function(){  
 	draw_scene("/?year=2008&alg=dhont");
-	draw_map(Distribution);
+	draw_map();
 });
 
 
@@ -78,14 +79,27 @@ var show_info = function (desc, percentages) {
 	$("#grafico-info-adicional").html(info_str);
 };
 
-var draw_map = function(dist) {
+var draw_map = function() {
     var svg = $('#grafico2').svg({loadURL: 'mapa.svg'});
-	
-	
 };
 
 var select_partie = function (i) {
     $("#grafico-info-adicional li").removeClass("seleccionado");
     $("#grafico-info-adicional #"+i ).addClass("seleccionado");
-	//draw_map(Distribution);
+	draw_map_selection(Distribution, i);
+};
+
+var draw_map_selection = function(dist, i) {
+	var places = dist.places[i];
+	var svg = $('#grafico2').svg('get');
+	alert($("#Granada", svg.root()).attr('fill'));
+	
+	return;
+	for (j =0; j < places.length; j += 1) {
+		var place = places[j][0];
+		var quantity = places[j][1];
+		
+		var svg = $('#grafico2').svg('get');
+		$(place, svg.root()).attr('fill', 'red');
+	}
 };
