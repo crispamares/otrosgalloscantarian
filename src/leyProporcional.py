@@ -34,8 +34,8 @@ class LeyProporcional:
             numDiputados = round(1.0 * votos[partido] * totalEscanos / totalVotos);
             if (numDiputados > 0):
                 parlamento.anadirDiputados(("fake",partido),numDiputados)
-        
-        parlamento.anadirDiputados((None,"Libres"), parlamento.asientosLibres)               
+
+        parlamento.anadirDiputados((None,"Libres"), parlamento.asientosLibres)
 
         return parlamento
 

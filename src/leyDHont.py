@@ -3,10 +3,15 @@ import math
 from parlamento import *
 from google.appengine.api import memcache
 
+from escanosProv2004 import escanosProvincia2004
+from escanosProv2008 import escanosProvincia2008
+
+
 class LeyDHont:
-    def __init__(self, ano):
+    def __init__(self, ano, th=0.03):
         self.diputadosProvincias = {}
-        self.threshold = 0.03
+        self.threshold = th
+        self.ano = ano
         self.censos = model.CensoElectoral.all()
         self.censos.filter("ano =",ano)
         self.key = "LeyDHont"+ano
@@ -24,11 +29,13 @@ class LeyDHont:
 
         # Asignar diputados fijos de las provincias
         poblacionDeDerecho = 0
+        #print "Provincias"
         for censoProvincia in self.censos:
             provincia = censoProvincia.provincia
+            #print provincia
             poblacionDeDerecho += censoProvincia.censoTotal
             candidaturas = self.candidaturasMayoritarias(censoProvincia)
-            diputadosProvinciales[provincia] = self.asignarDiputados(candidaturas)
+            diputadosProvinciales[provincia] = self.asignarDiputados(candidaturas,provincia)
             #print "Diputados Provinciales"
             #print diputadosProvinciales[provincia]
 
@@ -84,6 +91,8 @@ class LeyDHont:
             votosBlanco = censoProvincia.votosBlanco
             votos = self.pucherazo.darPucherazo(votos,votosBlanco,self.caciques)
         candidaturasValidas = {}
+        #print "Votos en ", censoProvincia.provincia
+        #print votos
         for partido in votos:
             if ((1.0*votos[partido]/totalVotos) > self.threshold):
                 candidaturasValidas[partido] = votos[partido]
@@ -91,8 +100,13 @@ class LeyDHont:
 
 
     # Calcula los coeficientes de cada candidatura
-    def asignarDiputados(self, candidaturas):
-        numDiputados = 15 #numDiputados(provincia)
+    def asignarDiputados(self, candidaturas, provincia):
+        numDiputados = 0
+        if (eval(self.ano) <= 2004):
+            numDiputados = escanosProvincia2004[provincia]
+        else:
+            numDiputados = escanosProvincia2008[provincia]
+        #print "Asignando ", numDiputados, " escanos"
         diputados = []
         # Divide los votos entre el numero de diputados de la provincia
         for partido in candidaturas:
@@ -102,4 +116,6 @@ class LeyDHont:
 
         # Reordena los votos obtenidos
         diputados.sort()
+        #print "Diputados por provincia"
+        #print diputados
         return diputados

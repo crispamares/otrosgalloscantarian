@@ -37,14 +37,15 @@ def getElementCached(nombreLey, year, leyElectoral):
     
 
 class MainPage(webapp.RequestHandler):
-  
+
   def get(self):
     # If there is GET/POST data, retrieve it
     year = self.request.get('year', "")
     algorithm = self.request.get('alg', "")
+    param = self.request.get('param',"")
     flush_cache = self.request.get('flushcache', False)
     hacerPucherazo = self.request.get('pucherazo',False)
-    caciques = self.request.get('caciques','')
+    caciques = self.request.get('caciques',"")
 
     if flush_cache:
         memcache.flush_all()
@@ -61,7 +62,12 @@ class MainPage(webapp.RequestHandler):
         pucherazo = Pucherazo()
 
     if( algorithm == 'dhont'):
-      ley = LeyDHont(year)
+      params = param.split(":")
+      th = 0.03
+      if param != "":
+          th = eval(params[0])
+
+      ley = LeyDHont(year,th)
       ley.manipular(caciques.split(":"),pucherazo)
       parlamento = ley.repartirEscanos()
       self.response.out.write( simplejson.dumps(parlamento.configuracion()) )
