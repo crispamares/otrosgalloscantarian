@@ -79,7 +79,7 @@ var show_info = function (desc, percentages) {
 };
 
 var draw_map = function(dist) {
-    var svg = $('#grafico2').svg({loadURL: 'lion.svg'});
+    var svg = $('#grafico2').svg({loadURL: 'mapa.svg'});
 	
 	
 };
