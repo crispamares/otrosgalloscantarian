@@ -53,11 +53,15 @@ function seleccionarLeyDhont(){
 	draw_scene(query);
 }
 
-function seleccionarManoli(){
+function seleccionarDroop(){
 	document.getElementById("leydhont").className = "ley";	
 	document.getElementById("manoli").className = "leysel";
 	document.getElementById("pruebito").className = "ley";
-	document.getElementById("descripcioncorta").innerHTML ="<h2>Ley de manoli</h2><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+	document.getElementById("descripcioncorta").innerHTML ="<h2>Cociente Droop</h2>" + 
+	"<p>Denominado así en honor a su proponente, el abogado inglés Henry Droop, cuyo libro Sobre el Método para Elegir los Representantes fue publicado en 1868. Se calcula dividiendo el total de votos válidos a tomar en cuenta entre el número de puestos a distribuir más uno, y luego al número entero que resulte se le añade uno.</p>"
+	document.getElementById("descripcionmas").innerHTML = "<p>El cociente de Droop tiene la característica de ser el que teóricamente permite la distribución de un número mayor de cargos sin llegar nunca a repartir más de los que correspondan a la respectiva circunscripción. En otras palabras, es el divisor más pequeño utilizable sin peligro de adjudicar más puestos que los sometidos a elección. Algunas leyes electorales han adoptado cocientes aun menores, pero esto las ha obligado a prever correctivos para el caso de que se presente este problema..</p>" +
+	"<p>En la actualidad el cociente de Droop sirve de base al Sistema del Voto Unico Transferible en Irlanda, Malta y Australia (senado). También se usa dentro del llamado sistema de Hagenbach-Bischoff, que emplea la distribución por cociente para la primera distribución y el método D’Hondt (media más elevada) para la adjudicación de los cargos restantes, por ello algunos autores dan a este cociente el nombre de Hagenbach-Bischoff. En esta modalidad (combinado con el método D’Hondt) funciona en Suiza, Luxemburgo y Lichstenstein.</p>"
+	
 	var indice = document.getElementById("select-ano").selectedIndex; 
 	var ano = document.getElementById("select-ano").options[indice].value; 
 	var query = "/?year=" + ano + "&alg=manoli";
